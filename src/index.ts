@@ -12,7 +12,7 @@ export default async function main() {
     .replace(/\[\:\]/g, ":");
 
   // Copy the cleaned URL back to the clipboard
-  await Clipboard.copy(urlClean);
+  await Clipboard.paste(urlClean);
 
   // Show a notification
   await showHUD("Cleaned URL copied to clipboard");
