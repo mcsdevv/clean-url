@@ -5,7 +5,10 @@ export default async function main() {
   const { text: urlDirty } = await Clipboard.read();
 
   // Replace hxxps with https and [.] with .
-  const urlClean = urlDirty.replace(/hxxps/g, "https").replace(/\[\.\]/g, ".");
+  const urlClean = urlDirty
+    .toLowerCase()
+    .replace(/hxxps/g, "https")
+    .replace(/\[\.\]/g, ".");
 
   // Copy the cleaned URL back to the clipboard
   await Clipboard.copy(urlClean);
