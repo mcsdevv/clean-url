@@ -8,6 +8,7 @@ export default async function main() {
   const urlClean = urlDirty
     .toLowerCase()
     .replace(/hxxps/g, "https")
+    .replace(/hxxp/g, "http")
     .replace(/\[\.\]/g, ".")
     .replace(/\[\:\]/g, ":");
 
