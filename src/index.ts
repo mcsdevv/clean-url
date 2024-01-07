@@ -10,6 +10,7 @@ export default async function main() {
     .replace(/hxxps/g, "https")
     .replace(/hxxp/g, "http")
     .replace(/\[\.\]/g, ".")
+    .replace(/\[dot\]/g, ".")
     .replace(/\[\:\]/g, ":");
 
   // Copy the cleaned URL back to the clipboard
