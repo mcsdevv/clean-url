@@ -14,7 +14,9 @@ export default async function main() {
     .replace(/\[\.\]/g, ".")
     .replace(/\[dot\]/g, ".")
     .replace(/\[\:\]/g, ":")
-    .replace(ipRegex, "");
+    .replace(ipRegex, "")
+    .replace(/- /g, "-")
+    .replace(/\. /g, ".");
 
   // Copy the cleaned URL back to the clipboard
   await Clipboard.paste(urlClean);
