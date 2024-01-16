@@ -15,7 +15,9 @@
     }
   ],
   "dependencies": {
-    "@raycast/api": "^1.64.5"
+    "@raycast/api": "^1.64.5",
+    "better-opn": "^3.0.2",
+    "valid-url": "^1.0.9"
   },
   "devDependencies": {
     "@raycast/eslint-config": "^1.0.6",
