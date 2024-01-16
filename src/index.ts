@@ -18,7 +18,11 @@ export default async function main() {
     .replace(/\[\:\]/g, ":")
     .replace(ipRegex, "")
     .replace(/- /g, "-")
-    .replace(/\. /g, ".");
+    .replace(/\. /g, ".")
+    .replace(/^\s+|\s+$/g, "");
+
+  // Copy the cleaned URL to the clipboard (mainly for debugging)
+  await Clipboard.copy(urlClean);
 
   try {
     // Check to see if the URL is valid else throw
