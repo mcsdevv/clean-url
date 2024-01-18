@@ -6,6 +6,7 @@ export default async function main() {
   // Get the URL from the clipboard
   const { text: urlDirty } = await Clipboard.read();
 
+  // Regex to remove IP addresses from the URL
   const ipRegex =
     /\[?\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b\]?/g;
 
@@ -15,6 +16,7 @@ export default async function main() {
     .replace(/hxxp/g, "http")
     .replace(/\[\.\]/g, ".")
     .replace(/\[dot\]/g, ".")
+    .replace(/\(\.\)/g, ".")
     .replace(/\[\:\]/g, ":")
     .replace(ipRegex, "")
     .replace(/- /g, "-")
