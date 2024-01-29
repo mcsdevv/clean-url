@@ -23,17 +23,23 @@ export default async function main() {
     .replace(/\. /g, ".")
     .replace(/^\s+|\s+$/g, "");
 
+  let urlWithProtocol = urlClean;
+
+  if (!/^https?:\/\//i.test(urlClean)) {
+    urlWithProtocol = "https://" + urlClean;
+  }
+
   // Copy the cleaned URL to the clipboard (mainly for debugging)
-  await Clipboard.copy(urlClean);
+  await Clipboard.copy(urlWithProtocol);
 
   try {
     // Check to see if the URL is valid else throw
-    if (!validUrl.isUri(urlClean)) {
+    if (!validUrl.isUri(urlWithProtocol)) {
       throw new Error("invalid-url");
     }
 
     // Open the URL in the default browser
-    opn(urlClean);
+    opn(urlWithProtocol);
 
     // Show a notification
     await showHUD("New tab opened 🎉");
@@ -43,7 +49,7 @@ export default async function main() {
     // @ts-ignore
     switch (error.message) {
       case "invalid-url":
-        await showHUD("Invalid URL found 🚫 - " + urlClean);
+        await showHUD("Invalid URL found 🚫 - " + urlWithProtocol);
         break;
       default:
         // @ts-ignore
