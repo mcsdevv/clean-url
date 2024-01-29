@@ -10,7 +10,7 @@ export default async function main() {
   const ipRegex =
     /\[?\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b\]?/g;
 
-  const urlClean = urlDirty
+  let urlClean = urlDirty
     .toLowerCase()
     .replace(/hxxps/g, "https")
     .replace(/hxxp/g, "http")
@@ -23,23 +23,21 @@ export default async function main() {
     .replace(/\. /g, ".")
     .replace(/^\s+|\s+$/g, "");
 
-  let urlWithProtocol = urlClean;
-
   if (!/^https?:\/\//i.test(urlClean)) {
-    urlWithProtocol = "https://" + urlClean;
+    urlClean = "https://" + urlClean;
   }
 
   // Copy the cleaned URL to the clipboard (mainly for debugging)
-  await Clipboard.copy(urlWithProtocol);
+  await Clipboard.copy(urlClean);
 
   try {
     // Check to see if the URL is valid else throw
-    if (!validUrl.isUri(urlWithProtocol)) {
+    if (!validUrl.isUri(urlClean)) {
       throw new Error("invalid-url");
     }
 
     // Open the URL in the default browser
-    opn(urlWithProtocol);
+    opn(urlClean);
 
     // Show a notification
     await showHUD("New tab opened 🎉");
@@ -49,7 +47,7 @@ export default async function main() {
     // @ts-ignore
     switch (error.message) {
       case "invalid-url":
-        await showHUD("Invalid URL found 🚫 - " + urlWithProtocol);
+        await showHUD("Invalid URL found 🚫 - " + urlClean);
         break;
       default:
         // @ts-ignore
