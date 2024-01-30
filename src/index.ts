@@ -12,6 +12,7 @@ export default async function main() {
 
   let urlClean = urlDirty
     .toLowerCase()
+    .replace(/^url\(s\):\s/, "")
     .replace(/hxxps/g, "https")
     .replace(/hxxp/g, "http")
     .replace(/\[\.\]/g, ".")
@@ -24,6 +25,9 @@ export default async function main() {
     .replace(/\(\.\)/g, "")
     .replace(/^\s+|\s+$/g, "")
     .replace(/ /g, "");
+
+  console.log("clean pre protocol", urlClean);
+  showHUD("clean pre protocol " + urlClean);
 
   if (!/^https?:\/\//i.test(urlClean)) {
     urlClean = "https://" + urlClean;
