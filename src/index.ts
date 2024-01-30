@@ -21,7 +21,9 @@ export default async function main() {
     .replace(ipRegex, "")
     .replace(/- /g, "-")
     .replace(/\. /g, ".")
-    .replace(/^\s+|\s+$/g, "");
+    .replace(/\(\.\)/g, "")
+    .replace(/^\s+|\s+$/g, "")
+    .replace(/ /g, "");
 
   if (!/^https?:\/\//i.test(urlClean)) {
     urlClean = "https://" + urlClean;
